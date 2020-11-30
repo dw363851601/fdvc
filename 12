@@ -1,0 +1,373 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['10.51.30.28',\n",
+       " '10.51.30.29',\n",
+       " '10.51.30.30',\n",
+       " '10.51.30.31',\n",
+       " '10.51.30.32',\n",
+       " '10.51.30.33',\n",
+       " '10.51.30.34',\n",
+       " '10.51.30.35',\n",
+       " '10.51.30.36',\n",
+       " '10.51.30.37',\n",
+       " '10.51.30.50',\n",
+       " '10.51.30.51',\n",
+       " '10.51.30.52',\n",
+       " '10.51.30.53',\n",
+       " '10.51.30.54',\n",
+       " '10.51.30.55',\n",
+       " '10.51.30.56',\n",
+       " '10.51.30.57',\n",
+       " '10.51.30.58',\n",
+       " '10.51.30.59',\n",
+       " '10.52.30.17',\n",
+       " '10.52.30.18',\n",
+       " '10.52.30.19',\n",
+       " '10.52.30.20',\n",
+       " '10.52.30.21',\n",
+       " '10.52.30.22',\n",
+       " '10.52.30.23',\n",
+       " '10.52.30.24',\n",
+       " '10.52.30.25',\n",
+       " '10.52.30.26',\n",
+       " '10.52.30.28',\n",
+       " '10.52.30.29',\n",
+       " '10.52.30.30',\n",
+       " '10.52.30.31',\n",
+       " '10.52.30.32',\n",
+       " '10.52.30.33',\n",
+       " '10.52.30.34',\n",
+       " '10.52.30.35',\n",
+       " '10.52.30.36',\n",
+       " '10.52.30.37',\n",
+       " '10.73.225.56',\n",
+       " '10.73.225.57',\n",
+       " '10.73.225.59',\n",
+       " '10.73.225.60',\n",
+       " '10.73.225.105',\n",
+       " '10.73.225.106',\n",
+       " '10.73.225.107',\n",
+       " '10.73.225.108',\n",
+       " '10.79.96.161',\n",
+       " '10.79.96.186',\n",
+       " '10.79.96.187',\n",
+       " '10.79.96.188',\n",
+       " '10.79.96.189',\n",
+       " '10.79.96.190',\n",
+       " '10.79.96.191',\n",
+       " '10.79.96.192',\n",
+       " '10.168.69.87',\n",
+       " '10.168.69.88',\n",
+       " '10.168.69.89',\n",
+       " '10.168.69.90',\n",
+       " '10.168.69.91',\n",
+       " '10.168.69.92',\n",
+       " '10.168.69.93',\n",
+       " '10.168.69.94',\n",
+       " '10.168.69.95',\n",
+       " '10.168.69.96',\n",
+       " '10.168.69.97',\n",
+       " '10.168.69.98',\n",
+       " '10.168.69.99',\n",
+       " '10.168.69.100',\n",
+       " '10.168.69.101']"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#import sys\n",
+    "#sys.path.append('../')\n",
+    "from os import listdir\n",
+    "import os\n",
+    "import socket\n",
+    "#import numpy as np\n",
+    "\n",
+    "\n",
+    "\n",
+    "dirPath = \"/Users/a2/log/applog\"\n",
+    "files=listdir('/Users/a2/log/applog')\n",
+    "files.remove('.DS_Store')\n",
+    "\n",
+    "#files\n",
+    "files=sorted(files,key=socket.inet_aton)\n",
+    "files"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "res = \"\"\n",
+    "i = 0\n",
+    "#str(files[i])\n",
+    "#open(np.concatenate(\"/Users/a2/log/applog/\"+ \"10.51.30.28\" + \"/home/dongwei/appinfo\"))\n",
+    "for file in files:\n",
+    "    des=os.path.join(\"/Users/a2/log/applog/\"+ files[i] + \"/home/dongwei/appinfo\")\n",
+    "    #open(des)\n",
+    "    i+=1\n",
+    "    title = \"第%s个 %s\" % (i, file[0:])\n",
+    "    #print(title)\n",
+    "    with open(des, \"r\", encoding='utf-8') as file:\n",
+    "        content = file.read()\n",
+    "        file.close()\n",
+    "        append = \"\\n%s\\n\\n%s\" % (title, content)\n",
+    "        res += append\n",
+    "        \n",
+    "with open(\"/Users/a2/log/dest/applog_all1.log\", \"w\", encoding='utf-8' ) as outFile :\n",
+    "    outFile.write(res)\n",
+    "    outFile.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "4635122\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "print(len(res))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
+
+
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['10.51.30.39',\n",
+       " '10.51.30.40',\n",
+       " '10.51.30.41',\n",
+       " '10.51.30.42',\n",
+       " '10.51.30.43',\n",
+       " '10.51.30.44',\n",
+       " '10.51.30.45',\n",
+       " '10.51.30.46',\n",
+       " '10.51.30.47',\n",
+       " '10.51.30.48',\n",
+       " '10.52.30.6',\n",
+       " '10.52.30.7',\n",
+       " '10.52.30.8',\n",
+       " '10.52.30.9',\n",
+       " '10.52.30.10',\n",
+       " '10.52.30.11',\n",
+       " '10.52.30.12',\n",
+       " '10.52.30.13',\n",
+       " '10.52.30.14',\n",
+       " '10.52.30.15',\n",
+       " '10.52.30.39',\n",
+       " '10.52.30.40',\n",
+       " '10.52.30.41',\n",
+       " '10.52.30.42',\n",
+       " '10.52.30.43',\n",
+       " '10.52.30.44',\n",
+       " '10.52.30.45',\n",
+       " '10.52.30.46',\n",
+       " '10.52.30.47',\n",
+       " '10.52.30.48',\n",
+       " '10.73.225.67',\n",
+       " '10.73.225.68',\n",
+       " '10.73.225.69',\n",
+       " '10.73.225.84',\n",
+       " '10.73.225.85',\n",
+       " '10.73.225.86',\n",
+       " '10.73.225.87',\n",
+       " '10.73.225.88',\n",
+       " '10.79.96.162',\n",
+       " '10.79.96.163',\n",
+       " '10.79.96.164',\n",
+       " '10.79.96.165',\n",
+       " '10.79.96.166',\n",
+       " '10.79.96.167',\n",
+       " '10.79.96.168',\n",
+       " '10.79.96.169',\n",
+       " '10.79.96.170',\n",
+       " '10.79.96.171',\n",
+       " '10.79.96.172',\n",
+       " '10.79.96.173',\n",
+       " '10.79.96.174',\n",
+       " '10.79.96.175',\n",
+       " '10.79.96.176',\n",
+       " '10.79.96.177',\n",
+       " '10.79.96.178',\n",
+       " '10.79.96.179',\n",
+       " '10.79.96.180',\n",
+       " '10.79.96.181',\n",
+       " '10.79.96.182',\n",
+       " '10.79.96.183',\n",
+       " '10.79.96.184',\n",
+       " '10.79.96.185',\n",
+       " '10.168.69.71',\n",
+       " '10.168.69.72',\n",
+       " '10.168.69.73',\n",
+       " '10.168.69.74',\n",
+       " '10.168.69.75',\n",
+       " '10.168.69.76',\n",
+       " '10.168.69.77',\n",
+       " '10.168.69.78',\n",
+       " '10.168.69.79',\n",
+       " '10.168.69.80',\n",
+       " '10.168.69.81',\n",
+       " '10.168.69.82',\n",
+       " '10.168.69.83',\n",
+       " '10.168.69.84',\n",
+       " '10.168.69.85']"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#import sys\n",
+    "#sys.path.append('../')\n",
+    "from os import listdir\n",
+    "import os\n",
+    "import socket\n",
+    "#import numpy as np\n",
+    "\n",
+    "\n",
+    "\n",
+    "dirPath = \"/Users/a2/log/weblog\"\n",
+    "files=listdir('/Users/a2/log/weblog')\n",
+    "#files.remove('.DS_Store')\n",
+    "\n",
+    "#files\n",
+    "files=sorted(files,key=socket.inet_aton)\n",
+    "files"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "res = \"\"\n",
+    "i = 0\n",
+    "#str(files[i])\n",
+    "#open(np.concatenate(\"/Users/a2/log/applog/\"+ \"10.51.30.28\" + \"/home/dongwei/appinfo\"))\n",
+    "for file in files:\n",
+    "    des=os.path.join(\"/Users/a2/log/weblog/\"+ files[i] + \"/home/dongwei/webinfo\")\n",
+    "    #open(des)\n",
+    "    i+=1\n",
+    "    title = \"第%s个 %s\" % (i, file[0:])\n",
+    "    #print(title)\n",
+    "    with open(des, \"r\", encoding='utf-8') as file:\n",
+    "        content = file.read()\n",
+    "        file.close()\n",
+    "        append = \"\\n%s\\n\\n%s\" % (title, content)\n",
+    "        res += append\n",
+    "        \n",
+    "with open(\"/Users/a2/log/dest/weblog_all1.log\", \"w\", encoding='utf-8' ) as outFile :\n",
+    "    outFile.write(res)\n",
+    "    outFile.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "236371\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(len(res))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
